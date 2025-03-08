@@ -301,13 +301,13 @@ function updateMainTitle(now) {
 
   let titleText = "";
   if (now < t1000) {
-    titleText = "Round1";
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round1";
   } else if (now >= t1000 && now < t1155) {
-    titleText = "Round2";
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round2";
   } else if (now >= t1155 && now < t1455) {
-    titleText = "Round3";
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round3";
   } else {
-    titleText = "Round3";
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛";
   }
   document.getElementById("main-title").innerText = titleText;
 }
