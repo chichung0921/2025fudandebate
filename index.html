@@ -219,21 +219,31 @@
 <div id="countdown">检测时间...</div>
 
 <script>
-// 设置每天固定的开始和结束时间（本地时间）
-var startTime = new Date();
+// 获取北京时间
+function getBeijingTime() {
+  var now = new Date();
+  var utc = now.getTime() + (now.getTimezoneOffset() * 6000);
+  var beijingTime = new Date(utc + (3600000 * 8));
+  return beijingTime;
+}
+
+// 设置每天固定的开始和结束时间（北京时间）
+var startTime = getBeijingTime();
 startTime.setHours(8, 0, 0, 0);   // 8:00
-var endTime = new Date();
+var endTime = getBeijingTime();
 endTime.setHours(8, 15, 0, 0);    // 8:15
 
-// 设置表格显示的时间（本地时间）
-var showTableTime = new Date('2025-03-08T08:15:00');
+// 设置表格显示的时间（北京时间）
+var showTableTime = new Date('2025-03-08T08:15:00+08:00');
 
 // 定时器，每秒更新一次倒计时
 var timer = setInterval(updateCountdown, 1000);
 
 function updateCountdown() {
-  var now = new Date();
-  
+  var now = getBeijingTime();
+  console.log("Current time: " + now);
+  console.log("Show table time: " + showTableTime);
+
   // 检查是否到了显示表格的时间
   if (now >= showTableTime) {
     document.getElementById('schedule-table').style.display = 'table';
