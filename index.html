@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
   <meta charset="UTF-8" />
-  <title>2025 CUDC & FLTRP 复旦大学校选赛 Round 1</title>
+  <title>2025 CUDC & FLTRP 复旦大学校选赛</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,262 +13,402 @@
     h1, h2 {
       margin-bottom: 0.5em;
     }
+    .hidden {
+      display: none;
+    }
     table {
       border-collapse: collapse;
       margin: 0 auto;
       margin-bottom: 20px;
       text-align: center;
-      display: none; /* 初始隐藏表格 */
     }
     th, td {
       border: 1px solid #ccc;
       padding: 8px 12px;
       text-align: center;
       vertical-align: middle;
-      font-size: 20px;
+      font-size: 16px;
     }
     #countdown {
       font-size: 24px;
       font-weight: bold;
-      margin-top: 20px;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
 
-<h1>2025 CUDC & FLTRP 复旦大学校选赛 Round 1</h1>
-
+<!-- 动态标题，会随时间段显示 Round1 / Round2 / Round3 -->
+<h1 id="main-title">Round1</h1>
 <hr/>
 
-<h2>Motion</h2>
-<blockquote>
-  <strong>This house belives that</strong>
-  <br/>
-</blockquote>
+<!-- ========== Round1 内容 ========== -->
+<div id="round1-content" class="hidden">
+  <h2>Round1 Motion</h2>
+  <blockquote>
+    <strong>This house believes that</strong>
+    <br/>
+    <!-- 在这里可补充更完整的 Round1 Motion -->
+    <p>（Round1 的具体 Motion 文案）</p>
+  </blockquote>
 
-<table id="schedule-table">
+  <!-- 将你给的表格完整替换到这里 -->
+  <table id="schedule-table">
     <tr>
-        <td colspan="2"><b>Room1</b></td>
-        <td></td>
-        <td colspan="2"><b>Room2</b></td>
-        <td></td>
-        <td colspan="2"><b>Room3</b></td>
-        <td></td>
-        <td colspan="2"><b>Room4</b></td>
-        <td></td>
-        <td colspan="2"><b>Room5</b></td>
-        <td></td>
-        <td colspan="2"><b>Room6</b></td>
+      <td colspan="2"><b>Room1</b></td>
+      <td></td>
+      <td colspan="2"><b>Room2</b></td>
+      <td></td>
+      <td colspan="2"><b>Room3</b></td>
+      <td></td>
+      <td colspan="2"><b>Room4</b></td>
+      <td></td>
+      <td colspan="2"><b>Room5</b></td>
+      <td></td>
+      <td colspan="2"><b>Room6</b></td>
     </tr>
     <tr>
-        <td>OG</td>
-        <td>OO</td>
-        <td></td>
-        <td>OG</td>
-        <td>OO</td>
-        <td></td>
-        <td>OG</td>
-        <td>OO</td>
-        <td></td>
-        <td>OG</td>
-        <td>OO</td>
-        <td></td>
-        <td>OG</td>
-        <td>OO</td>
-        <td></td>
-        <td>OG</td>
-        <td>OO</td>
+      <td>OG</td>
+      <td>OO</td>
+      <td></td>
+      <td>OG</td>
+      <td>OO</td>
+      <td></td>
+      <td>OG</td>
+      <td>OO</td>
+      <td></td>
+      <td>OG</td>
+      <td>OO</td>
+      <td></td>
+      <td>OG</td>
+      <td>OO</td>
+      <td></td>
+      <td>OG</td>
+      <td>OO</td>
     </tr>
     <tr>
-        <td>任康凡</td>
-        <td>张羽涵</td>
-        <td></td>
-        <td>徐向晖</td>
-        <td>刘奕麟 </td>
-        <td></td>
-        <td>杨清清</td>
-        <td>王镜然 </td>
-        <td></td>
-        <td>刘厚健</td>
-        <td>胡晋绮</td>
-        <td></td>
-        <td>章家钰</td>
-        <td>蒋恩彤</td>
-        <td></td>
-        <td>李昀卓</td>
-        <td>丁嘉玲 </td>
-        <td></td>
+      <td>任康凡</td>
+      <td>张羽涵</td>
+      <td></td>
+      <td>徐向晖</td>
+      <td>刘奕麟 </td>
+      <td></td>
+      <td>杨清清</td>
+      <td>王镜然 </td>
+      <td></td>
+      <td>刘厚健</td>
+      <td>胡晋绮</td>
+      <td></td>
+      <td>章家钰</td>
+      <td>蒋恩彤</td>
+      <td></td>
+      <td>李昀卓</td>
+      <td>丁嘉玲 </td>
+      <td></td>
     </tr>
     <tr>
-        <td>杨安妮</td>
-        <td>钟佳翎</td>
-        <td></td>
-        <td>俞哲灏</td>
-        <td>宫润宇 </td>
-        <td></td>
-        <td>王语馨</td>
-        <td>魏璟怡</td>
-        <td></td>
-        <td>陈胥慷</td>
-        <td>曾可颖</td>
-        <td></td>
-        <td>成诗雅</td>
-        <td>郑芷茵</td>
-        <td></td>
-        <td>温祺荣 </td>
-        <td>赵冬芳</td>
+      <td>杨安妮</td>
+      <td>钟佳翎</td>
+      <td></td>
+      <td>俞哲灏</td>
+      <td>宫润宇 </td>
+      <td></td>
+      <td>王语馨</td>
+      <td>魏璟怡</td>
+      <td></td>
+      <td>陈胥慷</td>
+      <td>曾可颖</td>
+      <td></td>
+      <td>成诗雅</td>
+      <td>郑芷茵</td>
+      <td></td>
+      <td>温祺荣 </td>
+      <td>赵冬芳</td>
     </tr>
     <tr>
-        <td>2512</td>
-        <td>2521</td>
-        <td></td>
-        <td>2518</td>
-        <td>2509</td>
-        <td></td>
-        <td>2519</td>
-        <td>2516</td>
-        <td></td>
-        <td>2502</td>
-        <td>2503</td>
-        <td></td>
-        <td>2522</td>
-        <td>2506</td>
-        <td></td>
-        <td>2508</td>
-        <td>2501</td>
+      <td>2512</td>
+      <td>2521</td>
+      <td></td>
+      <td>2518</td>
+      <td>2509</td>
+      <td></td>
+      <td>2519</td>
+      <td>2516</td>
+      <td></td>
+      <td>2502</td>
+      <td>2503</td>
+      <td></td>
+      <td>2522</td>
+      <td>2506</td>
+      <td></td>
+      <td>2508</td>
+      <td>2501</td>
     </tr>
     <tr>
-        <td>CG</td>
-        <td>CO</td>
-        <td></td>
-        <td>CG</td>
-        <td>CO</td>
-        <td></td>
-        <td>CG</td>
-        <td>CO</td>
-        <td></td>
-        <td>CG</td>
-        <td>CO</td>
-        <td></td>
-        <td>CG</td>
-        <td>CO</td>
-        <td></td>
-        <td>CG</td>
-        <td>CO</td>
+      <td>CG</td>
+      <td>CO</td>
+      <td></td>
+      <td>CG</td>
+      <td>CO</td>
+      <td></td>
+      <td>CG</td>
+      <td>CO</td>
+      <td></td>
+      <td>CG</td>
+      <td>CO</td>
+      <td></td>
+      <td>CG</td>
+      <td>CO</td>
+      <td></td>
+      <td>CG</td>
+      <td>CO</td>
     </tr>
     <tr>
-        <td>李灵希 </td>
-        <td>沈高涵</td>
-        <td></td>
-        <td>张馨宁</td>
-        <td>赵贤育</td>
-        <td></td>
-        <td>吕卓萱 </td>
-        <td>SW</td>
-        <td></td>
-        <td>蒋朋成</td>
-        <td>黄圣然 </td>
-        <td></td>
-        <td>彭枭瀚 </td>
-        <td>王心妍</td>
-        <td></td>
-        <td>邵小爽 </td>
-        <td>郑羽裳 </td>
+      <td>李灵希 </td>
+      <td>沈高涵</td>
+      <td></td>
+      <td>张馨宁</td>
+      <td>赵贤育</td>
+      <td></td>
+      <td>吕卓萱 </td>
+      <td>SW</td>
+      <td></td>
+      <td>蒋朋成</td>
+      <td>黄圣然 </td>
+      <td></td>
+      <td>彭枭瀚 </td>
+      <td>王心妍</td>
+      <td></td>
+      <td>邵小爽 </td>
+      <td>郑羽裳 </td>
     </tr>
     <tr>
-        <td>陈玥源</td>
-        <td>顾朋悦</td>
-        <td></td>
-        <td>曹露丹</td>
-        <td>胡思源 </td>
-        <td></td>
-        <td>刘小北</td>
-        <td>杨蕊嘉</td>
-        <td></td>
-        <td>王大江</td>
-        <td>陶依婷</td>
-        <td></td>
-        <td>苗姗姗</td>
-        <td>朱易轩</td>
-        <td></td>
-        <td>王佳鑫 </td>
-        <td>杨宇轩  </td>
+      <td>陈玥源</td>
+      <td>顾朋悦</td>
+      <td></td>
+      <td>曹露丹</td>
+      <td>胡思源 </td>
+      <td></td>
+      <td>刘小北</td>
+      <td>杨蕊嘉</td>
+      <td></td>
+      <td>王大江</td>
+      <td>陶依婷</td>
+      <td></td>
+      <td>苗姗姗</td>
+      <td>朱易轩</td>
+      <td></td>
+      <td>王佳鑫 </td>
+      <td>杨宇轩  </td>
     </tr>
     <tr>
-        <td>2507</td>
-        <td>2514</td>
-        <td></td>
-        <td>2520</td>
-        <td>2523</td>
-        <td></td>
-        <td>2510</td>
-        <td>2515</td>
-        <td></td>
-        <td>2505</td>
-        <td>2504</td>
-        <td></td>
-        <td>2511</td>
-        <td>2517</td>
-        <td></td>
-        <td>2513</td>
-        <td>2524</td>
+      <td>2507</td>
+      <td>2514</td>
+      <td></td>
+      <td>2520</td>
+      <td>2523</td>
+      <td></td>
+      <td>2510</td>
+      <td>2515</td>
+      <td></td>
+      <td>2505</td>
+      <td>2504</td>
+      <td></td>
+      <td>2511</td>
+      <td>2517</td>
+      <td></td>
+      <td>2513</td>
+      <td>2524</td>
     </tr>
-</table>
+  </table>
+</div>
 
-<h2>倒计时</h2>
+<!-- ========== Round2 内容(示例占位) ========== -->
+<div id="round2-content" class="hidden">
+  <h2>Round2 Motion</h2>
+  <blockquote>
+    <strong>This house would</strong>
+    <p>(示例占位：Round2 Motion)</p>
+  </blockquote>
+  <table>
+    <tr>
+      <th colspan="2">Room1</th><th colspan="2">Room2</th>
+    </tr>
+    <tr>
+      <td>OG</td><td>OO</td>
+      <td>OG</td><td>OO</td>
+    </tr>
+    <tr>
+      <td>CG</td><td>CO</td>
+      <td>CG</td><td>CO</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ========== Round3 内容(示例占位) ========== -->
+<div id="round3-content" class="hidden">
+  <h2>Round3 Motion</h2>
+  <blockquote>
+    <strong>This house regrets</strong>
+    <p>(示例占位：Round3 Motion)</p>
+  </blockquote>
+  <table>
+    <tr>
+      <th colspan="2">Room1</th><th colspan="2">Room2</th>
+    </tr>
+    <tr>
+      <td>OG</td><td>OO</td>
+      <td>OG</td><td>OO</td>
+    </tr>
+    <tr>
+      <td>CG</td><td>CO</td>
+      <td>CG</td><td>CO</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 倒计时/提示信息 -->
 <div id="countdown">检测时间...</div>
 
 <script>
-// 获取北京时间
-function getBeijingTime() {
-  var now = new Date();
-  var utc = now.getTime() + (now.getTimezoneOffset() * 6000);
-  var beijingTime = new Date(utc + (3600000 * 8));
-  return beijingTime;
+// ========== 比赛时间设置（示例：2025-03-09） ==========
+// 每轮比赛区间
+const round1Start = new Date('2025-03-09T08:15:00+08:00');
+const round1End   = new Date('2025-03-09T10:00:00+08:00');
+
+const round2Start = new Date('2025-03-09T10:10:00+08:00');
+const round2End   = new Date('2025-03-09T11:55:00+08:00');
+
+const round3Start = new Date('2025-03-09T13:10:00+08:00');
+const round3End   = new Date('2025-03-09T14:55:00+08:00');
+
+// 倒计时 15 分钟
+const COUNTDOWN_DURATION = 15 * 60 * 1000;
+
+// 获取当前北京时间
+function getNowBeijing() {
+  const now = new Date();
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  return new Date(utc + 3600000 * 8);
 }
 
-// 设置每天固定的开始和结束时间（北京时间）
-var startTime = getBeijingTime();
-startTime.setHours(8, 15, 0, 0);   // 8:00
-var endTime = getBeijingTime();
-endTime.setHours(8, 30, 0, 0);    // 8:15
+// 更新页面标题 （Round1 / Round2 / Round3）
+function updateMainTitle(now) {
+  const dayBase = '2025-03-09T';
+  const t1000 = new Date(dayBase + '10:00:00+08:00');
+  const t1155 = new Date(dayBase + '11:55:00+08:00');
+  const t1455 = new Date(dayBase + '14:55:00+08:00');
 
-// 设置表格显示的时间（北京时间）
-var showTableTime = new Date('2025-03-08T08:15:00+08:00');
-
-// 定时器，每秒更新一次倒计时
-var timer = setInterval(updateCountdown, 1000);
-
-function updateCountdown() {
-  var now = getBeijingTime();
-  console.log("Current time: " + now);
-  console.log("Show table time: " + showTableTime);
-
-  // 检查是否到了显示表格的时间
-  if (now >= showTableTime) {
-    document.getElementById('schedule-table').style.display = 'table';
-  }
-
-  // 1. 如果当前时间还不到 8:00，倒计时尚未开始
-  if (now < startTime) {
-    document.getElementById('countdown').innerText = "倒计时尚未开始";
-  
-  // 2. 如果当前时间在 8:00 和 8:15 之间，显示剩余时间
-  } else if (now >= startTime && now < endTime) {
-    var remainingSecs = Math.floor((endTime - now) / 1000);
-    var minutes = Math.floor(remainingSecs / 60);
-    var seconds = remainingSecs % 60;
-
-    // 格式化秒数
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-    document.getElementById('countdown').innerText = minutes + ":" + seconds;
-
-  // 3. 如果当前时间已经超过 8:15，倒计时结束
+  let titleText = "";
+  if (now < t1000) {
+    titleText = "Round1";
+  } else if (now >= t1000 && now < t1155) {
+    titleText = "Round2";
+  } else if (now >= t1155 && now < t1455) {
+    titleText = "Round3";
   } else {
-    clearInterval(timer);
-    document.getElementById('countdown').innerText = "时间到！";
+    titleText = "Round3";
+  }
+  document.getElementById("main-title").innerText = titleText;
+}
+
+// 根据当前时间，显示或隐藏各轮的内容
+function updateMotionTableVisibility(now) {
+  const round1El = document.getElementById("round1-content");
+  const round2El = document.getElementById("round2-content");
+  const round3El = document.getElementById("round3-content");
+  // 初始都隐藏
+  round1El.classList.add("hidden");
+  round2El.classList.add("hidden");
+  round3El.classList.add("hidden");
+
+  const inRound1 = (now >= round1Start && now < round1End);
+  const inRound2 = (now >= round2Start && now < round2End);
+  const inRound3 = (now >= round3Start && now < round3End);
+
+  if (inRound1) {
+    round1El.classList.remove("hidden");
+  } else if (inRound2) {
+    round2El.classList.remove("hidden");
+  } else if (inRound3) {
+    round3El.classList.remove("hidden");
+  } else {
+    // 不在任何比赛时段
+    document.getElementById("countdown").innerText = "比赛尚未开始";
   }
 }
+
+// 倒计时字符串
+function getCountdownString(endTime, now) {
+  let diff = endTime - now;
+  if (diff <= 0) {
+    return "00:00";
+  }
+  let sec = Math.floor(diff / 1000);
+  let min = Math.floor(sec / 60);
+  sec = sec % 60;
+  let secStr = sec < 10 ? "0" + sec : sec;
+  return min + ":" + secStr;
+}
+
+// 更新倒计时/时间到/未开始
+function updateCountdownMessage(now) {
+  const cdEl = document.getElementById("countdown");
+
+  const inRound1 = (now >= round1Start && now < round1End);
+  const inRound2 = (now >= round2Start && now < round2End);
+  const inRound3 = (now >= round3Start && now < round3End);
+
+  if (inRound1) {
+    // Round1 倒计时：08:15 - 08:30
+    const cdEnd1 = new Date(round1Start.getTime() + COUNTDOWN_DURATION);
+    if (now < round1Start) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= round1Start && now < cdEnd1) {
+      cdEl.innerText = getCountdownString(cdEnd1, now);
+    } else {
+      cdEl.innerText = "时间到！";
+    }
+  } 
+  else if (inRound2) {
+    // Round2 倒计时：10:10 - 10:25
+    const cdEnd2 = new Date(round2Start.getTime() + COUNTDOWN_DURATION);
+    if (now < round2Start) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= round2Start && now < cdEnd2) {
+      cdEl.innerText = getCountdownString(cdEnd2, now);
+    } else {
+      cdEl.innerText = "时间到！";
+    }
+  }
+  else if (inRound3) {
+    // Round3 倒计时：13:10 - 13:25
+    const cdEnd3 = new Date(round3Start.getTime() + COUNTDOWN_DURATION);
+    if (now < round3Start) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= round3Start && now < cdEnd3) {
+      cdEl.innerText = getCountdownString(cdEnd3, now);
+    } else {
+      cdEl.innerText = "时间到！";
+    }
+  }
+  else {
+    // 不在任何比赛时段
+    cdEl.innerText = "倒计时未开始";
+  }
+}
+
+// 每秒刷新
+function updateAll() {
+  let now = getNowBeijing();
+  updateMainTitle(now);
+  updateMotionTableVisibility(now);
+  updateCountdownMessage(now);
+}
+
+setInterval(updateAll, 1000);
+// 页面加载后先执行一次
+updateAll();
 </script>
 
 </body>
