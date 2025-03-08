@@ -1,23 +1,47 @@
----
-title: "辩论赛静态页面"
----
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8" />
+  <title>辩论赛</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-bottom: 0.5em;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+    }
+    #countdown {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
 
-# 辩论赛
+<h1>辩论赛</h1>
+<p>此页面演示一个从每天 8:00 开始、持续 15 分钟的倒计时。如果在 8:00 前打开，将显示“倒计时尚未开始”；如果超过 8:15，则显示“时间到”。</p>
 
-下面是一个示例，展示如何从 8:00 开始计算 15 分钟的倒计时。  
-如果你在 8:00 之前打开，会显示“倒计时尚未开始”；如果在 8:00 至 8:15 之间打开，会动态显示剩余时间；如果超过 8:15，则显示“时间到”。
+<hr/>
 
----
+<h2>辩题</h2>
+<blockquote>
+  本场辩题：<strong>科技的发展是否会让人类的情感更加疏远？</strong>
+  <br/>（示例辩题，可根据需要自行修改）
+</blockquote>
 
-## 辩题
-
-> 本场辩题：**科技的发展是否会让人类的情感更加疏远？**  
-> （示例辩题，可根据需要自行修改）
-
----
-
-## 席位分配
-
+<h2>席位分配</h2>
 <table>
   <tr>
     <th>席位</th>
@@ -41,45 +65,43 @@ title: "辩论赛静态页面"
   </tr>
 </table>
 
----
-
-## 倒计时
-
-<div id="countdown" style="font-size: 24px; font-weight: bold; margin-top: 20px;">检测时间...</div>
+<h2>倒计时</h2>
+<div id="countdown">检测时间...</div>
 
 <script>
-// 固定的开始和结束时间（本地时间）
-var startTime = new Date();   // 开始时间：8:00
-startTime.setHours(8, 0, 0, 0);
+// 设置每天固定的开始和结束时间（本地时间）
+var startTime = new Date();
+startTime.setHours(8, 0, 0, 0);   // 8:00
+var endTime = new Date();
+endTime.setHours(8, 15, 0, 0);    // 8:15
 
-var endTime = new Date();     // 结束时间：8:15
-endTime.setHours(8, 15, 0, 0);
-
-// 每秒刷新倒计时
+// 定时器，每秒更新一次倒计时
 var timer = setInterval(updateCountdown, 1000);
 
 function updateCountdown() {
   var now = new Date();
-  
-  // 情况1：现在时间还不到8:00
+
+  // 1. 如果当前时间还不到 8:00，倒计时尚未开始
   if (now < startTime) {
-    document.getElementById('countdown').innerHTML = "倒计时尚未开始";
+    document.getElementById('countdown').innerText = "倒计时尚未开始";
   
-  // 情况2：现在时间在8:00和8:15之间，显示剩余时间
+  // 2. 如果当前时间在 8:00 和 8:15 之间，显示剩余时间
   } else if (now >= startTime && now < endTime) {
-    // 剩余秒数
     var remainingSecs = Math.floor((endTime - now) / 1000);
     var minutes = Math.floor(remainingSecs / 60);
     var seconds = remainingSecs % 60;
 
-    // 格式化显示
+    // 格式化秒数
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    document.getElementById('countdown').innerHTML = minutes + ":" + seconds;
+    document.getElementById('countdown').innerText = minutes + ":" + seconds;
 
-  // 情况3：超过8:15，倒计时结束
+  // 3. 如果当前时间已经超过 8:15，倒计时结束
   } else {
     clearInterval(timer);
-    document.getElementById('countdown').innerHTML = "时间到！";
+    document.getElementById('countdown').innerText = "时间到！";
   }
 }
 </script>
+
+</body>
+</html>
