@@ -769,6 +769,7 @@ function updateCountdownMessage(now) {
   const inRound1 = (now >= round1Start && now < round1End);
   const inRound2 = (now >= round2Start && now < round2End);
   const inRound3 = (now >= round3Start && now < round3End);
+    const inRound4 = (now >= resultStart && now < resultEnd);
   const inRoundF = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
@@ -815,6 +816,8 @@ function updateCountdownMessage(now) {
       cdEl.innerText = "时间到！";
     }
   }
+    else if (inRound4) {cdEl.innerText = "";   
+    }
   else {
     // 不在任何比赛时段
     cdEl.innerText = "倒计时未开始";
