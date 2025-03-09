@@ -573,10 +573,81 @@
         <td>2506</td>
         <td>2505</td>
     </tr>
-</table>
   </table>
 </div>
+  
+<div id="result-content" class="hidden">
+  <h2>经过三轮积分赛比拼，恭喜以下队伍成功晋级总决赛：</h2>
+ <table>
+    <tr>
+        <td><b>Team No.</b></td>
+         <td colspan="2"><b>Contestants</b></td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+</table>
+</div>
 
+<!-- Final 内容（15:15 - 17:00） -->
+<div id="final-content" class="hidden">
+  <blockquote>
+   <p class="motion-text">This house regrets the defining decade norm.</p>
+    <p class="info-text"><b>Info: </b> The <i>Defining Decade</i> is a cultural norm which urges young adults to persistently pursue life goals, even at the expense of significantly neglecting immediate desires. As part of this approach, it is common to maximize educational value from most activities, seek more responsibility at work, seek instrumental value from social relationships, and stigmatize idle time.</p>
+  </blockquote>
+  <table>
+    <tr>
+        <td>OG</td>
+        <td>OO</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>CG</td>
+        <td>CO</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>25</td>
+    </tr>
+</table>
+</div>
 <!-- 倒计时/提示信息 -->
 <div id="countdown">检测时间...</div>
 
@@ -592,6 +663,14 @@ const round2End   = new Date('2025-03-09T11:55:00+08:00');
 const round3Start = new Date('2025-03-09T13:10:00+08:00');
 const round3End   = new Date('2025-03-09T14:55:00+08:00');
 
+  // 公布晋级结果时段：15:10 - 15:15
+const resultStart = new Date('2025-03-09T15:10:00+08:00');
+const resultEnd   = new Date('2025-03-09T15:15:00+08:00');
+
+// Final：15:15 - 17:00
+const finalStart = new Date('2025-03-09T15:15:00+08:00');
+const finalEnd   = new Date('2025-03-09T17:00:00+08:00');
+  
 // 倒计时 15 分钟
 const COUNTDOWN_DURATION = 15 * 60 * 1000;
 
@@ -604,47 +683,63 @@ function getNowBeijing() {
 
 // 更新页面标题 （Round1 / Round2 / Round3）
 function updateMainTitle(now) {
-  const dayBase = '2025-03-09T';
-  const t1000 = new Date(dayBase + '10:00:00+08:00');
-  const t1155 = new Date(dayBase + '11:55:00+08:00');
-  const t1455 = new Date(dayBase + '14:55:00+08:00');
+  const titleEl = document.getElementById("main-title");
 
-  let titleText = "";
-  if (now < t1000) {
-    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round1";
-  } else if (now >= t1000 && now < t1155) {
-    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round2";
-  } else if (now >= t1155 && now < t1455) {
-    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round3";
+  if (now < round1Start) {
+    titleEl.innerText = "比赛尚未开始";
+  } else if (now >= round1Start && now < round1End) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 1";
+  } else if (now >= round1End && now < round2Start) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 2";
+  } else if (now >= round2Start && now < round2End) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 2";
+  } else if (now >= round2End && now < round3Start) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Lunch Break";
+  } else if (now >= round3Start && now < round3End) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 3";
+  } else if (now >= round3End && now < resultStart) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛积分赛已结束";
+  } else if (now >= resultStart && now < resultEnd) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛积分赛晋级结果";
+  } else if (now >= resultEnd && now < finalEnd) {
+    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Final";
   } else {
-    titleText = "2025 CUDC & FLTRP 复旦大学校选赛";
+    // 17:00 之后，可以显示“比赛已结束”或继续显示 "Final"
+    titleEl.innerText = "比赛已结束";
   }
-  document.getElementById("main-title").innerText = titleText;
 }
 
 // 根据当前时间，显示或隐藏各轮的内容
-function updateMotionTableVisibility(now) {
-  const round1El = document.getElementById("round1-content");
-  const round2El = document.getElementById("round2-content");
-  const round3El = document.getElementById("round3-content");
-  // 初始都隐藏
-  round1El.classList.add("hidden");
-  round2El.classList.add("hidden");
-  round3El.classList.add("hidden");
+function updateContentVisibility(now) {
+  const r1 = document.getElementById("round1-content");
+  const r2 = document.getElementById("round2-content");
+  const r3 = document.getElementById("round3-content");
+  const rc = document.getElementById("result-content"); // 晋级结果
+  const fc = document.getElementById("final-content");  // Final
 
-  const inRound1 = (now >= round1Start && now < round1End);
-  const inRound2 = (now >= round2Start && now < round2End);
-  const inRound3 = (now >= round3Start && now < round3End);
+  // 先全部隐藏
+  [r1, r2, r3, rc, fc].forEach(el => el.classList.add("hidden"));
+
+  // 判断当前在哪个区间
+  const inRound1  = (now >= round1Start && now < round1End);
+  const inRound2  = (now >= round2Start && now < round2End);
+  const inRound3  = (now >= round3Start && now < round3End);
+  const inResult  = (now >= resultStart && now < resultEnd);
+  const inFinal   = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
-    round1El.classList.remove("hidden");
+    r1.classList.remove("hidden");
   } else if (inRound2) {
-    round2El.classList.remove("hidden");
+    r2.classList.remove("hidden");
   } else if (inRound3) {
-    round3El.classList.remove("hidden");
+    r3.classList.remove("hidden");
+  } else if (inResult) {
+    rc.classList.remove("hidden");
+  } else if (inFinal) {
+    fc.classList.remove("hidden");
   } else {
-    // 不在任何比赛时段
-    document.getElementById("countdown").innerText = "比赛尚未开始";
+    // 其它时间（尚未开始 / 中场休息 / 17:00后）都显示“比赛尚未开始”或“比赛已结束”之类
+    // 这里由 updateMainTitle() + updateCountdownMessage() 去显示文字
   }
 }
 
@@ -668,6 +763,7 @@ function updateCountdownMessage(now) {
   const inRound1 = (now >= round1Start && now < round1End);
   const inRound2 = (now >= round2Start && now < round2End);
   const inRound3 = (now >= round3Start && now < round3End);
+  const inFinal  = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
     // Round1 倒计时：08:15 - 08:30
@@ -698,6 +794,17 @@ function updateCountdownMessage(now) {
       cdEl.innerText = "倒计时未开始";
     } else if (now >= round3Start && now < cdEnd3) {
       cdEl.innerText = getCountdownString(cdEnd3, now);
+    } else {
+      cdEl.innerText = "时间到！";
+    }
+  }
+     else if (inFinal) {
+    // Final 倒计时：15:15 ~ 15:30
+    const cdEndF = new Date(finalStart.getTime() + COUNTDOWN_DURATION);
+     if (now < finalStart) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= finalStart && now < cdEndF) {
+      cdEl.innerText = getCountdownString(cdEndF, now);
     } else {
       cdEl.innerText = "时间到！";
     }
