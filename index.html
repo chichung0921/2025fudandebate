@@ -768,7 +768,7 @@ function updateCountdownMessage(now) {
   const inRound1 = (now >= round1Start && now < round1End);
   const inRound2 = (now >= round2Start && now < round2End);
   const inRound3 = (now >= round3Start && now < round3End);
-  const inRoundF = (now >= roundFStart && now < roundFEnd);
+  const inRoundF = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
     // Round1 倒计时：08:15 - 08:30
@@ -805,10 +805,10 @@ function updateCountdownMessage(now) {
   }
     else if (inRoundF) {
     // Round3 倒计时：13:10 - 13:25
-    const cdEndF = new Date(roundFStart.getTime() + COUNTDOWN_DURATION);
-    if (now < roundFStart) {
+    const cdEndF = new Date(finalStart.getTime() + COUNTDOWN_DURATION);
+    if (now < finalStart) {
       cdEl.innerText = "倒计时未开始";
-    } else if (now >= roundFStart && now < cdEndF) {
+    } else if (now >= finalStart && now < cdEndF) {
       cdEl.innerText = getCountdownString(cdEndF, now);
     } else {
       cdEl.innerText = "时间到！";
