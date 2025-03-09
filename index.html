@@ -683,112 +683,151 @@ function getNowBeijing() {
 
 // 更新页面标题 （Round1 / Round2 / Round3）
 function updateMainTitle(now) {
-  const titleEl = document.getElementById("main-title");
+  const dayBase = '2025-03-09T';
+  const t1000 = new Date(dayBase + '10:00:00+08:00');
+  const t1155 = new Date(dayBase + '11:55:00+08:00');
+  const t1310 = new Date(dayBase + '13:10:00+08:00');
+  const t1455 = new Date(dayBase + '14:55:00+08:00');
+  const t1510 = new Date(dayBase + '15:10:00+08:00');
+  const t1515 = new Date(dayBase + '15:15:00+08:00');
+  const t1700 = new Date(dayBase + '17:00:00+08:00');
 
-  if (now < round1Start) {
-    titleEl.innerText = "比赛尚未开始";
-  } else if (now >= round1Start && now < round1End) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 1";
-  } else if (now >= round1End && now < round2Start) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 2";
-  } else if (now >= round2Start && now < round2End) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 2";
-  } else if (now >= round2End && now < round3Start) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Lunch Break";
-  } else if (now >= round3Start && now < round3End) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 3";
-  } else if (now >= round3End && now < resultStart) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛积分赛已结束";
-  } else if (now >= resultStart && now < resultEnd) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛积分赛晋级结果";
-  } else if (now >= resultEnd && now < finalEnd) {
-    titleEl.innerText = "2025 CUDC & FLTRP 复旦大学校选赛 Final";
+   let titleText = "";
+  if (now < t1000) {
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 1";
+  } else if (now >= t1000 && now < t1155) {
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 2";
+  } else if (now >= t1155 && now < t1310) {
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Lunch Break";
+  } else if (now >= t1310 && now < t1455) {
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛 Round 3";
+  } else if (now >= t1455 && now < t1510) {
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛积分赛已结束";
+  } else if (now >= t1510 && now < t1515) {
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛晋级结果公布";
   } else {
-    // 17:00 之后，可以显示“比赛已结束”或继续显示 "Final"
-    titleEl.innerText = "比赛已结束";
+    titleText = "2025 CUDC & FLTRP 复旦大学校选赛";
   }
+  document.getElementById("main-title").innerText = titleText;
 }
 
+
 // 根据当前时间，显示或隐藏各轮的内容
-function updateCountdownMessage(now) {
-  const cdEl = document.getElementById("countdown");
+function updateMotionTableVisibility(now) {
+  const round1El = document.getElementById("round1-content");
+  const round2El = document.getElementById("round2-content");
+  const round3El = document.getElementById("round3-content");
+  const roundEl = document.getElementById("result-content");
+  const roundFEl = document.getElementById("final-content");
+  // 初始都隐藏
+  round1El.classList.add("hidden");
+  round2El.classList.add("hidden");
+  round3El.classList.add("hidden");
+  roundEl.classList.add("hidden");
+  roundFEl.classList.add("hidden");
 
-  // 为方便，定义一个函数来显示“XX:XX”的倒计时字符串
-  function formatCountdown(endTime) {
-    const diff = endTime - now;
-    if (diff <= 0) return "00:00";
-    let s = Math.floor(diff / 1000);
-    const m = Math.floor(s / 60);
-    s = s % 60;
-    return m + ":" + (s < 10 ? "0" + s : s);
-  }
-
-  // 判断是否在各个比赛区间内
   const inRound1 = (now >= round1Start && now < round1End);
   const inRound2 = (now >= round2Start && now < round2End);
   const inRound3 = (now >= round3Start && now < round3End);
-  const inFinal  = (now >= finalStart && now < finalEnd);
+  const inRound = (now >= resultStart && now < resultEnd);
+  const inRoundF = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
-    // Round1 倒计时：8:15 ~ 8:30
+    round1El.classList.remove("hidden");
+  } else if (inRound2) {
+    round2El.classList.remove("hidden");
+  } else if (inRound3) {
+    round3El.classList.remove("hidden");
+  } else if (inRound) {
+    roundEl.classList.remove("hidden");
+  } else if (inRoundF) {
+    roundFEl.classList.remove("hidden");
+  } else {
+    // 不在任何比赛时段
+    document.getElementById("countdown").innerText = "比赛尚未开始";
+  }
+}
+
+// 倒计时字符串
+function getCountdownString(endTime, now) {
+  let diff = endTime - now;
+  if (diff <= 0) {
+    return "00:00";
+  }
+  let sec = Math.floor(diff / 1000);
+  let min = Math.floor(sec / 60);
+  sec = sec % 60;
+  let secStr = sec < 10 ? "0" + sec : sec;
+  return min + ":" + secStr;
+}
+
+// 更新倒计时/时间到/未开始
+function updateCountdownMessage(now) {
+  const cdEl = document.getElementById("countdown");
+
+  const inRound1 = (now >= round1Start && now < round1End);
+  const inRound2 = (now >= round2Start && now < round2End);
+  const inRound3 = (now >= round3Start && now < round3End);
+  const inRoundF = (now >= roundFStart && now < roundFEnd);
+
+  if (inRound1) {
+    // Round1 倒计时：08:15 - 08:30
     const cdEnd1 = new Date(round1Start.getTime() + COUNTDOWN_DURATION);
-    if (now < cdEnd1) {
-      cdEl.innerText = formatCountdown(cdEnd1);
+    if (now < round1Start) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= round1Start && now < cdEnd1) {
+      cdEl.innerText = getCountdownString(cdEnd1, now);
     } else {
       cdEl.innerText = "时间到！";
     }
-  }
+  } 
   else if (inRound2) {
-    // Round2 倒计时：10:10 ~ 10:25
+    // Round2 倒计时：10:10 - 10:25
     const cdEnd2 = new Date(round2Start.getTime() + COUNTDOWN_DURATION);
-    if (now < cdEnd2) {
-      cdEl.innerText = formatCountdown(cdEnd2);
+    if (now < round2Start) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= round2Start && now < cdEnd2) {
+      cdEl.innerText = getCountdownString(cdEnd2, now);
     } else {
       cdEl.innerText = "时间到！";
     }
   }
   else if (inRound3) {
-    // Round3 倒计时：13:10 ~ 13:25
+    // Round3 倒计时：13:10 - 13:25
     const cdEnd3 = new Date(round3Start.getTime() + COUNTDOWN_DURATION);
-    if (now < cdEnd3) {
-      cdEl.innerText = formatCountdown(cdEnd3);
+    if (now < round3Start) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= round3Start && now < cdEnd3) {
+      cdEl.innerText = getCountdownString(cdEnd3, now);
     } else {
       cdEl.innerText = "时间到！";
     }
   }
-  else if (now >= resultStart && now < resultEnd) {
-    // 15:10 - 15:15 公布晋级结果，此时不需要比赛倒计时
-    cdEl.innerText = "（当前为晋级结果公布时段）";
-  }
-  else if (inFinal) {
-    // Final 倒计时：15:15 ~ 15:30
-    const cdEndF = new Date(finalStart.getTime() + COUNTDOWN_DURATION);
-    if (now < cdEndF) {
-      cdEl.innerText = formatCountdown(cdEndF);
+    else if (inRoundF) {
+    // Round3 倒计时：13:10 - 13:25
+    const cdEndF = new Date(roundFStart.getTime() + COUNTDOWN_DURATION);
+    if (now < roundFStart) {
+      cdEl.innerText = "倒计时未开始";
+    } else if (now >= roundFStart && now < cdEndF) {
+      cdEl.innerText = getCountdownString(cdEndF, now);
     } else {
       cdEl.innerText = "时间到！";
     }
-  }
-  else if (now >= finalEnd) {
-    // 17:00 之后
-    cdEl.innerText = "比赛已结束";
   }
   else {
-    // 不在任何比赛进行中
-    cdEl.innerText = "比赛尚未开始";
+    // 不在任何比赛时段
+    cdEl.innerText = "倒计时未开始";
   }
 }
 
-// ========== 6. 定时器：每秒刷新 ==========
-
+// 每秒刷新
 function updateAll() {
-  const now = getNowBeijing();
+  let now = getNowBeijing();
   updateMainTitle(now);
-  updateContentVisibility(now);
+  updateMotionTableVisibility(now);
   updateCountdownMessage(now);
 }
 
-// 每秒刷新一次
 setInterval(updateAll, 1000);
 // 页面加载后先执行一次
 updateAll();
