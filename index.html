@@ -576,7 +576,9 @@
 </div>
   
 <div id="result-content" class="hidden">
-  <h2>经过三轮积分赛比拼，恭喜以下队伍成功晋级总决赛：</h2>
+   <blockquote>
+    <p class="motion-text">经过三轮积分赛比拼，恭喜以下队伍成功晋级总决赛：</p>
+  </blockquote>
  <table>
     <tr>
         <td><b>Team No.</b></td>
@@ -716,19 +718,19 @@ function updateMotionTableVisibility(now) {
   const round1El = document.getElementById("round1-content");
   const round2El = document.getElementById("round2-content");
   const round3El = document.getElementById("round3-content");
-  const roundEl = document.getElementById("result-content");
+  const round4El = document.getElementById("result-content");
   const roundFEl = document.getElementById("final-content");
   // 初始都隐藏
   round1El.classList.add("hidden");
   round2El.classList.add("hidden");
   round3El.classList.add("hidden");
-  roundEl.classList.add("hidden");
+  round4El.classList.add("hidden");
   roundFEl.classList.add("hidden");
 
   const inRound1 = (now >= round1Start && now < round1End);
   const inRound2 = (now >= round2Start && now < round2End);
   const inRound3 = (now >= round3Start && now < round3End);
-  const inRound = (now >= resultStart && now < resultEnd);
+  const inRound4 = (now >= resultStart && now < resultEnd);
   const inRoundF = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
@@ -737,8 +739,8 @@ function updateMotionTableVisibility(now) {
     round2El.classList.remove("hidden");
   } else if (inRound3) {
     round3El.classList.remove("hidden");
-  } else if (inRound) {
-    roundEl.classList.remove("hidden");
+  } else if (inRound4) {
+    round4El.classList.remove("hidden");
   } else if (inRoundF) {
     roundFEl.classList.remove("hidden");
   } else {
