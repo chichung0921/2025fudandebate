@@ -747,12 +747,6 @@ function updateMotionTableVisibility(now) {
     // 不在任何比赛时段
     document.getElementById("countdown").innerText = "比赛尚未开始";
   }
-  if (inRound3) {
-  round3El.classList.remove("hidden");
-  // 确保其他内容被隐藏
-  round4El.classList.add("hidden");
-  document.querySelector("#result-content table").style.display = "none";
-}
 }
 
 // 倒计时字符串
