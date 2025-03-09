@@ -710,119 +710,85 @@ function updateMainTitle(now) {
 }
 
 // 根据当前时间，显示或隐藏各轮的内容
-function updateContentVisibility(now) {
-  const r1 = document.getElementById("round1-content");
-  const r2 = document.getElementById("round2-content");
-  const r3 = document.getElementById("round3-content");
-  const rc = document.getElementById("result-content"); // 晋级结果
-  const fc = document.getElementById("final-content");  // Final
-
-  // 先全部隐藏
-  [r1, r2, r3, rc, fc].forEach(el => el.classList.add("hidden"));
-
-  // 判断当前在哪个区间
-  const inRound1  = (now >= round1Start && now < round1End);
-  const inRound2  = (now >= round2Start && now < round2End);
-  const inRound3  = (now >= round3Start && now < round3End);
-  const inResult  = (now >= resultStart && now < resultEnd);
-  const inFinal   = (now >= finalStart && now < finalEnd);
-
-  if (inRound1) {
-    r1.classList.remove("hidden");
-  } else if (inRound2) {
-    r2.classList.remove("hidden");
-  } else if (inRound3) {
-    r3.classList.remove("hidden");
-  } else if (inResult) {
-    rc.classList.remove("hidden");
-  } else if (inFinal) {
-    fc.classList.remove("hidden");
-  } else {
-    // 其它时间（尚未开始 / 中场休息 / 17:00后）都显示“比赛尚未开始”或“比赛已结束”之类
-    // 这里由 updateMainTitle() + updateCountdownMessage() 去显示文字
-  }
-}
-
-// 倒计时字符串
-function getCountdownString(endTime, now) {
-  let diff = endTime - now;
-  if (diff <= 0) {
-    return "00:00";
-  }
-  let sec = Math.floor(diff / 1000);
-  let min = Math.floor(sec / 60);
-  sec = sec % 60;
-  let secStr = sec < 10 ? "0" + sec : sec;
-  return min + ":" + secStr;
-}
-
-// 更新倒计时/时间到/未开始
 function updateCountdownMessage(now) {
   const cdEl = document.getElementById("countdown");
 
+  // 为方便，定义一个函数来显示“XX:XX”的倒计时字符串
+  function formatCountdown(endTime) {
+    const diff = endTime - now;
+    if (diff <= 0) return "00:00";
+    let s = Math.floor(diff / 1000);
+    const m = Math.floor(s / 60);
+    s = s % 60;
+    return m + ":" + (s < 10 ? "0" + s : s);
+  }
+
+  // 判断是否在各个比赛区间内
   const inRound1 = (now >= round1Start && now < round1End);
   const inRound2 = (now >= round2Start && now < round2End);
   const inRound3 = (now >= round3Start && now < round3End);
   const inFinal  = (now >= finalStart && now < finalEnd);
 
   if (inRound1) {
-    // Round1 倒计时：08:15 - 08:30
+    // Round1 倒计时：8:15 ~ 8:30
     const cdEnd1 = new Date(round1Start.getTime() + COUNTDOWN_DURATION);
-    if (now < round1Start) {
-      cdEl.innerText = "倒计时未开始";
-    } else if (now >= round1Start && now < cdEnd1) {
-      cdEl.innerText = getCountdownString(cdEnd1, now);
+    if (now < cdEnd1) {
+      cdEl.innerText = formatCountdown(cdEnd1);
     } else {
       cdEl.innerText = "时间到！";
     }
-  } 
+  }
   else if (inRound2) {
-    // Round2 倒计时：10:10 - 10:25
+    // Round2 倒计时：10:10 ~ 10:25
     const cdEnd2 = new Date(round2Start.getTime() + COUNTDOWN_DURATION);
-    if (now < round2Start) {
-      cdEl.innerText = "倒计时未开始";
-    } else if (now >= round2Start && now < cdEnd2) {
-      cdEl.innerText = getCountdownString(cdEnd2, now);
+    if (now < cdEnd2) {
+      cdEl.innerText = formatCountdown(cdEnd2);
     } else {
       cdEl.innerText = "时间到！";
     }
   }
   else if (inRound3) {
-    // Round3 倒计时：13:10 - 13:25
+    // Round3 倒计时：13:10 ~ 13:25
     const cdEnd3 = new Date(round3Start.getTime() + COUNTDOWN_DURATION);
-    if (now < round3Start) {
-      cdEl.innerText = "倒计时未开始";
-    } else if (now >= round3Start && now < cdEnd3) {
-      cdEl.innerText = getCountdownString(cdEnd3, now);
+    if (now < cdEnd3) {
+      cdEl.innerText = formatCountdown(cdEnd3);
     } else {
       cdEl.innerText = "时间到！";
     }
   }
-     else if (inFinal) {
+  else if (now >= resultStart && now < resultEnd) {
+    // 15:10 - 15:15 公布晋级结果，此时不需要比赛倒计时
+    cdEl.innerText = "（当前为晋级结果公布时段）";
+  }
+  else if (inFinal) {
     // Final 倒计时：15:15 ~ 15:30
     const cdEndF = new Date(finalStart.getTime() + COUNTDOWN_DURATION);
-     if (now < finalStart) {
-      cdEl.innerText = "倒计时未开始";
-    } else if (now >= finalStart && now < cdEndF) {
-      cdEl.innerText = getCountdownString(cdEndF, now);
+    if (now < cdEndF) {
+      cdEl.innerText = formatCountdown(cdEndF);
     } else {
       cdEl.innerText = "时间到！";
     }
   }
+  else if (now >= finalEnd) {
+    // 17:00 之后
+    cdEl.innerText = "比赛已结束";
+  }
   else {
-    // 不在任何比赛时段
-    cdEl.innerText = "倒计时未开始";
+    // 不在任何比赛进行中
+    cdEl.innerText = "比赛尚未开始";
   }
 }
 
-// 每秒刷新
+// ========== 6. 定时器：每秒刷新 ==========
+
 function updateAll() {
-  let now = getNowBeijing();
+  const now = getNowBeijing();
   updateMainTitle(now);
-  updateMotionTableVisibility(now);
+  updateContentVisibility(now);
   updateCountdownMessage(now);
 }
 
+// 每秒刷新一次
 setInterval(updateAll, 1000);
 // 页面加载后先执行一次
 updateAll();
